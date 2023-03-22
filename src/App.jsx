@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './App.scss';
 
@@ -10,41 +10,48 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
+// const [something, setSomthing] = useState('something');
+// const [age, setAge] = useState(0);
+// const [factorOfFive, setFactorOfFive] = useState(false);
+const App = () => {
 
-class App extends React.Component {
+const [data, setData] = useState('null');
+const [requestParams, setRequestParams] = useState({});
+const [loading, setLoading] = useState(false);
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     data: null,
+  //     requestParams: {},
+  //   };
+  // }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      requestParams: {},
-    };
-  }
-
-  callApi = (requestParams) => {
+ const callApi = (requestParams) => {
     // mock output
-    const data = {
-      count: 2,
-      results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-      ],
-    };
-    this.setState({data, requestParams});
-  }
-
-  render() {
+    setLoading(true);
+    setTimeout(() =>{
+      const data = {
+        count: 2,
+        results: [
+          {name: 'fake thing 1', url: 'http://fakethings.com/1'},
+          {name: 'fake thing 2', url: 'http://fakethings.com/2'},
+        ],
+      };
+      setData(data);
+      setRequestParams(requestParams);
+      setLoading(false);
+    }, 3000)
+    }
     return (
       <React.Fragment>
         <Header />
-        <div>Request Method: {this.state.requestParams.method}</div>
-        <div>URL: {this.state.requestParams.url}</div>
-        <Form handleApiCall={this.callApi} />
-        <Results data={this.state.data} />
+        <div>Request Method: {requestParams.method}</div>
+        <div>URL: {requestParams.url}</div>
+        <Form handleApiCall={callApi} />
+        <Results data={data} loading={loading} />
         <Footer />
       </React.Fragment>
     );
-  }
-}
+};
 
 export default App;
