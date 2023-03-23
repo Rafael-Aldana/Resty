@@ -2,7 +2,7 @@
 
 ## Project: RESTy
 
-## Author: Rafael
+## Author: Rafael Aldana
 
 ### Problem Domain
 

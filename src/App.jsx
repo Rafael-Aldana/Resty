@@ -15,7 +15,7 @@ import Results from './Components/Results';
 // const [factorOfFive, setFactorOfFive] = useState(false);
 const App = () => {
 
-const [data, setData] = useState('null');
+const [data, setData] = useState('');
 const [requestParams, setRequestParams] = useState({});
 const [loading, setLoading] = useState(false);
   // constructor(props) {

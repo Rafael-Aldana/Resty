@@ -3,8 +3,8 @@ import './Header.scss'
 
 const Header = () => {
   return (
-    <header class="header">
-      <h1>RESTy</h1>
+    <header class="header" data-testid="header">
+      <h1 data-testid="h1">RESTy</h1>
     </header>
   );
 };
