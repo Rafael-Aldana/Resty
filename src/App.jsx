@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './App.scss';
 
@@ -16,9 +16,9 @@ import axios from 'axios';
 // const [factorOfFive, setFactorOfFive] = useState(false);
 const App = () => {
 
-const [data, setData] = useState('');
-const [requestParams, setRequestParams] = useState({});
-const [loading, setLoading] = useState(false);
+  const [data, setData] = useState('');
+  const [requestParams, setRequestParams] = useState({});
+  const [loading, setLoading] = useState(false);
   // constructor(props) {
   //   super(props);
   //   this.state = {
@@ -26,35 +26,36 @@ const [loading, setLoading] = useState(false);
   //     requestParams: {},
   //   };
   // }
-  
+
   const callApi = (requestParams) => {
     // mock output
     setLoading(true);
-    setTimeout(() =>{
-      setRequestParams(requestParams);
-      setLoading(false);
-    }, 3000)
+    setRequestParams(requestParams);
+    setLoading(false);
   }
-  
+
   useEffect(() => {
     const getData = async () => {
-    console.log('RequestParams have Changed')
-    let response = await axios.get(requestParams);
-    setData(response.data);
+      console.log('RequestParams have Changed')
+      let response = await axios(requestParams);
+      setData(response.data);
     }
-    getData();
+    if(Object.keys(requestParams).length > 0 ){
+
+      getData();
+    }
   }, [requestParams]);
-  
-    return (
-      <React.Fragment>
-        <Header />
-        <div>Request Method: {requestParams.method}</div>
-        <div>URL: {requestParams.url}</div>
-        <Form handleApiCall={callApi} />
-        <Results data={data} loading={loading} />
-        <Footer />
-      </React.Fragment>
-    );
+
+  return (
+    <React.Fragment>
+      <Header />
+      <div>Request Method: {requestParams.method}</div>
+      <div>URL: {requestParams.url}</div>
+      <Form handleApiCall={callApi} />
+      <Results data={data} loading={loading} />
+      <Footer />
+    </React.Fragment>
+  );
 };
 
 export default App;
